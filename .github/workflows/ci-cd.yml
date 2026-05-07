@@ -32,6 +32,16 @@ jobs:
           chmod +x scripts/healthcheck.sh
           ./scripts/healthcheck.sh
 
+      - name: Run Load Test
+        run: |
+          chmod +x scripts/load_test.sh
+          ./scripts/load_test.sh
+
       - name: Build Docker Image
         run: |
-          docker build -t health-app -f docker/Dockerfile .
+          docker build -t devopsproject -f docker/Dockerfile .
+
+  #   - name: Run Deploy Script
+  #    run: |
+  #     chmod +x scripts/deploy.sh
+  #        ./scripts/deploy.sh

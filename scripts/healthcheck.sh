@@ -8,4 +8,5 @@ if [ $STATUS -eq 200 ]; then
   echo "✅ Servicio saludable"
 else
   echo "❌ Error en servicio"
+  exit 1
 fi
