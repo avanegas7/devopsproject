@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="http://localhost:30007/health"
+URL="http://localhost:5000/health"
 
 STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
 
