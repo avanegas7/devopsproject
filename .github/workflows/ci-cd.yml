@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t health-app .
+
+    - name: Run container test
+      run: |
+        docker run -d -p 8080:8080 health-app
+        sleep 5
+        curl http://localhost:8080/health
+
+    - name: Login DockerHub
+      run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+
+    - name: Push image
+      run: |
+        docker tag health-app your-dockerhub-user/health-app:latest
+        docker push your-dockerhub-user/health-app:latest
